@@ -1,10 +1,16 @@
 <script lang="ts">
-  import { PC } from "missing-coordinates";
+  import { PC, DrawConfiguration } from "missing-coordinates";
   import githubImage from "./GitHub.png";
 
-  function testFunction(bla: string) {
-    console.log(bla);
-  }
+  export let drawConfiguration: DrawConfiguration;
+  let data = {
+    name: "test",
+    axes: [
+      { name: "axis1", data: [0.1, 0.4, 0.9] },
+      { name: "axis2", data: [0.9, 0.1, 0.4] },
+      { name: "axis3", data: ["bli", "bli", "bla"] },
+    ],
+  };
 </script>
 
 <main class="content">
@@ -21,7 +27,11 @@
       <div>View on GitHub</div>
     </button>
   </div>
-  <PC name="test" testFunc={testFunction} />
+  <div class="main-div">
+    <div class="chart-div">
+      <PC {data} {drawConfiguration} />
+    </div>
+  </div>
 </main>
 
 <style>
@@ -69,5 +79,14 @@
   }
   button:active {
     color: inherit;
+  }
+  .chart-div {
+    border: 1px solid black;
+    display: inline-block;
+  }
+  .main-div {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
   }
 </style>
