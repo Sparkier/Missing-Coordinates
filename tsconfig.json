@@ -1,0 +1,13 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "types": ["svelte", "node"],
+    "noImplicitAny": true
+  },
+  "include": [
+    "packages/missing-coordinates/src/**/*",
+    "packages/storybook/stories/**/*"
+  ],
+  "exclude": ["node_modules/*"]
+}

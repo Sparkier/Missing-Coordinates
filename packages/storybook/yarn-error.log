@@ -1,0 +1,77 @@
+Arguments: 
+  /usr/local/Cellar/node@14/14.18.1/bin/node /Users/alex/.npm/bin/yarn
+
+PATH: 
+  /Users/alex/Documents/Work/Research/Diverging PC/export.nosync/venv/bin:/usr/local/opt/node@14/bin:/usr/local/sbin:/Users/alex/.fastlane/bin:/Users/alex/.npm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/Library/Apple/usr/bin:/usr/local/opt/node@14/bin:/usr/local/sbin:/Users/alex/.fastlane/bin:/Users/alex/.npm/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/alex/.gems/bin:/usr/local/opt/fzf/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/alex/.gems/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.18.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/missing-coordinates: Not found
+      at Request.params.callback [as _callback] (/Users/alex/.npm/lib/node_modules/yarn/lib/cli.js:67029:18)
+      at Request.self.callback (/Users/alex/.npm/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (events.js:400:28)
+      at Request.<anonymous> (/Users/alex/.npm/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (events.js:400:28)
+      at IncomingMessage.<anonymous> (/Users/alex/.npm/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (events.js:519:28)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1334:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
+
+npm manifest: 
+  {
+    "name": "svelte-missing-coordinates-demo",
+    "version": "0.0.0",
+    "description": "Demos for missing-coordinates",
+    "author": "Alex Bäuerle <bauerlealex@gmail.com> (https://a13x.io)",
+    "main": "lib/index.js",
+    "module": "esm/index.js",
+    "files": [
+      "src",
+      "esm",
+      "lib",
+      "types"
+    ],
+    "private": true,
+    "sideEffects": false,
+    "dependencies": {
+      "@storybook/source-loader": "6.3.12",
+      "@storybook/svelte": "6.3.12",
+      "svelte": "^3.44.2",
+      "missing-coordinates": "^1.0.0"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.16.0",
+      "@storybook/builder-webpack5": "^6.3.12",
+      "@storybook/manager-webpack5": "^6.3.12",
+      "gh-pages": "^3.2.3",
+      "svelte-check": "^2.2.10",
+      "svelte-loader": "^3.1.2",
+      "svelte-preprocess": "^4.9.8"
+    },
+    "license": "BSD-3-Clause",
+    "publishConfig": {
+      "access": "public"
+    },
+    "scripts": {
+      "demo:clean": "rm -rf _gh-pages",
+      "demo:build": "build-storybook -o _gh-pages",
+      "demo:publish": "gh-pages -d _gh-pages",
+      "deploy-demo": "npm run demo:clean && npm run demo:build && npm run demo:publish && npm run demo:clean",
+      "storybook": "start-storybook -p 9001"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

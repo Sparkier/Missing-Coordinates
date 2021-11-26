@@ -1,0 +1,53 @@
+{
+  "name": "missing-coordinates",
+  "version": "1.0.0",
+  "license": "BSD-3-Clause",
+  "description": "Draw parallel coordinates with missing values.",
+  "author": "Alex Bäuerle <bauerlealex@gmail.com> (https://a13x.io)",
+  "repository": "git@github.com:Sparkier/Missing-Coordinates.git",
+  "bugs": {
+    "url": "https://github.com/Sparkier/Missing-Coordinates/issues"
+  },
+  "sideEffects": false,
+  "svelte": "dist/index.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.umd.js",
+  "types": "dist/ts/index.d.ts",
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "validate": "svelte-check --ignore dist",
+    "prepublishOnly": "npm run build",
+    "semantic-release": "semantic-release"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "fs-extra": "^10.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-execute": "^1.1.1",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "sirv-cli": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
