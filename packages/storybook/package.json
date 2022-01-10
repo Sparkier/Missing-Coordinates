@@ -18,9 +18,9 @@
   "private": true,
   "sideEffects": false,
   "dependencies": {
-    "@storybook/source-loader": "6.4.9",
+    "@storybook/source-loader": "6.4.10",
     "@storybook/svelte": "6.3.12",
-    "svelte": "^3.44.3"
+    "svelte": "^3.45.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
