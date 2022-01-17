@@ -32,7 +32,7 @@
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.0",
     "fs-extra": "^10.0.0",
-    "rollup": "^2.63.0",
+    "rollup": "^2.64.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-execute": "^1.1.1",
     "rollup-plugin-livereload": "^2.0.0",
