@@ -23,7 +23,7 @@
     "svelte": "^3.46.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
+    "@babel/core": "^7.16.12",
     "@storybook/addon-controls": "^6.4.13",
     "@storybook/builder-webpack5": "^6.3.12",
     "@storybook/manager-webpack5": "^6.3.12",
