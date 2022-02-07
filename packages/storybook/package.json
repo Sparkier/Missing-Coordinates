@@ -20,7 +20,7 @@
   "dependencies": {
     "@storybook/source-loader": "6.4.17",
     "@storybook/svelte": "6.4.17",
-    "svelte": "^3.46.3"
+    "svelte": "^3.46.4"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
