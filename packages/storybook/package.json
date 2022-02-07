@@ -20,10 +20,10 @@
   "dependencies": {
     "@storybook/source-loader": "6.4.17",
     "@storybook/svelte": "6.4.17",
-    "svelte": "^3.46.3"
+    "svelte": "^3.46.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
+    "@babel/core": "^7.17.0",
     "@storybook/addon-controls": "^6.4.17",
     "@storybook/builder-webpack5": "^6.4.17",
     "@storybook/manager-webpack5": "^6.4.17",
