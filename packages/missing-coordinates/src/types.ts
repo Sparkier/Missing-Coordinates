@@ -39,10 +39,17 @@ export type Data = {
 
 export type AxisData = {
   name: string;
-  data: (number | string)[];
+  data: (number | string | null)[];
 };
 
 export type AxisDescriptor = {
   name: string;
   offset: number;
+  categorical: boolean;
+  categoricalItems: string[] | undefined;
+  extremes: { min: number; max: number } | undefined;
+};
+
+export type Coordinate = {
+  values: Record<string, number | string | null>;
 };
