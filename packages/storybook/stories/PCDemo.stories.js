@@ -15,8 +15,8 @@ const Template = ({ ...args }) => ({
 export const Demo = Template.bind({});
 Demo.args = {
   drawConfiguration: {
-    axesSpacing: 100,
-    axisHeight: 100,
+    axesSpacing: 120,
+    axisHeight: 200,
     axisLabelConfiguration: {
       show: true,
       textAnchor: "middle",

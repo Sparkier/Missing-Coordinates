@@ -1,16 +1,10 @@
 <script lang="ts">
   import { PC, DrawConfiguration } from "missing-coordinates";
   import githubImage from "./GitHub.png";
+  import penguins from "./penguins.json";
 
   export let drawConfiguration: DrawConfiguration;
-  let data = {
-    name: "test",
-    axes: [
-      { name: "axis1", data: [0.1, 0.4, 0.9] },
-      { name: "axis2", data: [0.9, 0.1, 0.4] },
-      { name: "axis3", data: ["bli", "bli", "bla"] },
-    ],
-  };
+  let data = penguins;
 </script>
 
 <main class="content">
