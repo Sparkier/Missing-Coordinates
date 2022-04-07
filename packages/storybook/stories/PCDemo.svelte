@@ -1,10 +1,10 @@
 <script lang="ts">
   import { PC, DrawConfiguration } from "missing-coordinates";
+import type { Data } from "missing-coordinates/src";
   import githubImage from "./GitHub.png";
-  import penguins from "./penguins.json";
 
   export let drawConfiguration: DrawConfiguration;
-  let data = penguins;
+  export let data: Data;
 </script>
 
 <main class="content">

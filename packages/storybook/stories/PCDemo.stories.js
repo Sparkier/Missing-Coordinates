@@ -1,19 +1,24 @@
 import PCDemo from "./PCDemo.svelte";
 import { TopBottomPosition, Variation, Concept } from "missing-coordinates";
-
+import penguins from "./penguins.json";
+import sample from "./sample.json";
 export default {
   title: "missing-coordinates/PC",
   component: PCDemo,
   argTypes: {},
 };
 
-const Template = ({ ...args }) => ({
+const PenguinsTemplate = ({ ...args }) => ({
   Component: PCDemo,
   props: args,
 });
 
-export const Demo = Template.bind({});
-Demo.args = {
+const SampleTemplate = ({ ...args }) => ({
+  Component: PCDemo,
+  props: args,
+});
+
+const defaultArgs = {
   drawConfiguration: {
     axesSpacing: 120,
     axisHeight: 200,
@@ -32,6 +37,18 @@ Demo.args = {
     fontSize: 12,
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
-    missingValuesAxisSpacing: 12,
+    missingValuesAxisSpacing: 35,
   },
+};
+
+export const PenguinsDemo = PenguinsTemplate.bind({});
+PenguinsDemo.args = {
+  data: penguins,
+  ...defaultArgs,
+};
+
+export const SampleDemo = SampleTemplate.bind({});
+SampleDemo.args = {
+  data: sample,
+  ...defaultArgs,
 };
