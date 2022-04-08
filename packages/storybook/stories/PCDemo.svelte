@@ -1,6 +1,6 @@
 <script lang="ts">
   import { PC, DrawConfiguration } from "missing-coordinates";
-import type { Data } from "missing-coordinates/src";
+  import type { Data } from "missing-coordinates/src";
   import githubImage from "./GitHub.png";
 
   export let drawConfiguration: DrawConfiguration;
