@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { AxisDescriptor, Concept, Coordinate, Variation } from "../types";
+  import type { AxisDescriptor, Coordinate } from "../types";
+  import { Concept } from "../types";
   import { drawConfig } from "../stores";
 
   export let coordinate: Coordinate;
