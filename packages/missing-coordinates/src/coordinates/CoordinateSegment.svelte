@@ -11,9 +11,11 @@
 
   function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
     const value = coordinate.values[axis.name];
+
     if (value === null) {
-      return;
+      return getPostionForMissingValue();
     }
+
     if (
       axis.categorical &&
       axis.categoricalItems !== undefined &&
