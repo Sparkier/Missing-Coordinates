@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { AxisDescriptor, Coordinate } from "../types";
+  import { AxisDescriptor, Concept, Coordinate, Variation } from "../types";
   import { drawConfig } from "../stores";
 
   export let coordinate: Coordinate;
@@ -23,6 +23,17 @@
     } else if (axis.extremes !== undefined && typeof value === "number") {
       return getNumericalAxisPosition(axis.extremes, value);
     }
+  }
+
+  function getPostionForMissingValue(): number | undefined {
+    if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
+      return $drawConfig.axisHeight + $drawConfig.missingValuesAxisSpacing;
+    } else if ($drawConfig.concept === Concept.IMPUTATION) {
+      // TODO implement imputation
+      return;
+    } 
+    // default case (Information Removal)
+    return;
   }
 
   function getCategoricalAxisPosition(
