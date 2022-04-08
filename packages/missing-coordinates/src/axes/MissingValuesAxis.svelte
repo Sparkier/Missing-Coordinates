@@ -1,14 +1,10 @@
 <script lang="ts">
   import { drawConfig, axes } from "../stores";
 
-  $: axisExtremes = getAxisExtremes();
-
-  function getAxisExtremes(): { min: number, max: number } {
-    const offsets = $axes.map(axis => axis.offset);
-    return {
-        min: Math.min(...offsets),
-        max: Math.max(...offsets)
-    }
+  $: offsets = $axes.map(axis => axis.offset);
+  $: axisExtremes = {
+    min: Math.min(...offsets),
+    max: Math.max(...offsets)
   }
 </script>
 
