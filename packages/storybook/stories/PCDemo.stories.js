@@ -1,8 +1,5 @@
 import PCDemo from "./PCDemo.svelte";
-import { TopBottomPosition } from "missing-coordinates";
 import { TopBottomPosition, Variation, Concept } from "missing-coordinates";
-import penguins from "./penguins.json";
-import sample from "./sample.json";
 
 export default {
   title: "missing-coordinates/PC",
