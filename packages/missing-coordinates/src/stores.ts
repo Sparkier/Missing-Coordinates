@@ -1,5 +1,5 @@
 import { writable, derived } from "svelte/store";
-import type { Data, AxisDescriptor } from "./types";
+import { Data, AxisDescriptor, Concept } from "./types";
 import { TopBottomPosition, DrawConfiguration, Coordinate } from "./types";
 
 export const drawConfig = writable<DrawConfiguration>(new DrawConfiguration());
@@ -39,12 +39,23 @@ export const width = derived(
 // Total height of the SVG element.
 export const height = derived(
   [drawConfig, axisLabelHeight, axisAnnotationHeight],
-  ([$drawConfiguration, $axisLabelHeight, $axisAnnotationHeight]) =>
-    $drawConfiguration.axisHeight +
-    $drawConfiguration.margin.top +
-    $drawConfiguration.margin.bottom +
-    $axisLabelHeight +
-    $axisAnnotationHeight
+  ([$drawConfiguration, $axisLabelHeight, $axisAnnotationHeight]) => {
+    // If we have the missing axis concept active, we need to add that to the height
+    // and remove half the height of the labels, since they are above.
+    const missingAxisHeight =
+      $drawConfiguration.concept === Concept.MISSING_VALUES_AXIS
+        ? $drawConfiguration.missingValuesAxisSpacing -
+          $axisAnnotationHeight / 2
+        : 0;
+    return (
+      $drawConfiguration.axisHeight +
+      $drawConfiguration.margin.top +
+      $drawConfiguration.margin.bottom +
+      $axisLabelHeight +
+      $axisAnnotationHeight +
+      missingAxisHeight
+    );
+  }
 );
 // All axis information.
 export const axes = derived([data, drawConfig], ([$data, $drawConfig]) =>
