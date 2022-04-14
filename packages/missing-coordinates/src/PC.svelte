@@ -3,6 +3,7 @@
   import AxisAnnotations from "./axes/AxisAnnotations.svelte";
   import AxisLabels from "./axes/AxisLabels.svelte";
   import Coordinates from "./coordinates/Coordinates.svelte";
+  import MissingValuesAxis from "./axes/MissingValuesAxis.svelte";
   import {
     width,
     height,
@@ -12,7 +13,7 @@
     data as storeData,
   } from "./stores";
   import type { Data } from "./types";
-  import { DrawConfiguration } from "./types";
+  import { DrawConfiguration, Concept } from "./types";
 
   export let drawConfiguration: DrawConfiguration = new DrawConfiguration();
   export let data: Data;
@@ -41,6 +42,9 @@
       >
         <Axes />
         <Coordinates />
+        {#if $drawConfig.concept === Concept.MISSING_VALUES_AXIS}
+          <MissingValuesAxis />
+        {/if}
       </g>
     </g>
   </svg>
