@@ -8,6 +8,7 @@ export class DrawConfiguration {
   variation: Variation = Variation.DEFAULT;
   concept: Concept = Concept.INFORMATION_REMOVAL;
   missingValuesAxisSpacing = 50;
+  imputationNeighbors = 2;
 }
 
 export class AxisLabelConfiguration {

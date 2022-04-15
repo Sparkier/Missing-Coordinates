@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { AxisDescriptor, Coordinate } from "../types";
   import { Concept } from "../types";
-  import { drawConfig } from "../stores";
+  import { axes, data, drawConfig } from "../stores";
+  import { imputeValueForAxis } from "./imputation";
 
   export let coordinate: Coordinate;
   export let axis1: AxisDescriptor;
@@ -14,7 +15,7 @@
     const value = coordinate.values[axis.name];
 
     if (value === null) {
-      return getPostionForMissingValue();
+      return getPostionForMissingValue(axis);
     }
 
     if (
@@ -28,13 +29,26 @@
     }
   }
 
-  function getPostionForMissingValue(): number | undefined {
+  function getPostionForMissingValue(axis: AxisDescriptor): number | undefined {
     if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
       return $drawConfig.axisHeight + $drawConfig.missingValuesAxisSpacing;
     } else if ($drawConfig.concept === Concept.IMPUTATION) {
-      // TODO implement imputation
-      return;
-    } 
+      const value = imputeValueForAxis(
+        $data,
+        axis,
+        coordinate,
+        $drawConfig.imputationNeighbors,
+        $axes
+      );
+      if (axis.categorical && axis.categoricalItems !== undefined) {
+        return getCategoricalAxisPosition(
+          axis.categoricalItems,
+          value as string
+        );
+      } else if (!axis.categorical && axis.extremes !== undefined) {
+        return getNumericalAxisPosition(axis.extremes, value as number);
+      }
+    }
     // default case (Information Removal)
     return;
   }
