@@ -9,6 +9,7 @@ export class DrawConfiguration {
   concept: Concept = Concept.INFORMATION_REMOVAL;
   missingValuesAxisSpacing = 50;
   imputationNeighbors = 2;
+  glyphRadius = 4;
 }
 
 export class AxisLabelConfiguration {

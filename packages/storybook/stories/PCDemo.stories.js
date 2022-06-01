@@ -39,6 +39,7 @@ const defaultArgs = {
     concept: Concept.INFORMATION_REMOVAL,
     missingValuesAxisSpacing: 35,
     imputationNeighbors: 2,
+    glyphRadius: 4,
   },
 };
 
