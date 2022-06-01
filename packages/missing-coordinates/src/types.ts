@@ -7,7 +7,7 @@ export class DrawConfiguration {
   fontSize = 12;
   variation: Variation = Variation.DEFAULT;
   concept: Concept = Concept.INFORMATION_REMOVAL;
-  missingValuesAxisSpacing = 35;
+  missingValuesAxisSpacing = 50;
 }
 
 export class AxisLabelConfiguration {
