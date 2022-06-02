@@ -27,6 +27,7 @@ export class MissingValuesConfiguraion {
   missingValuesAxisSpacing = 50;
   imputationNeighbors = 2;
   glyphRadius = 4;
+  missingValueOpacity = 0.1;
 }
 
 export enum TopBottomPosition {

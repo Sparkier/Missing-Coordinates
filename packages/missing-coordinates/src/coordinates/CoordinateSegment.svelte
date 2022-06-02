@@ -20,6 +20,9 @@
     axis1Index === 0 &&
     $drawConfig.variation === Variation.GLYPH &&
     isAxis1Null;
+  // Check whether the opacity of the line segment should be reduced.
+  $: shouldReduceOpacity =
+    $drawConfig.variation === Variation.OPACITY && (isAxis1Null || isAxis2Null);
 
   function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
     const value = coordinate.values[axis.name];
@@ -97,6 +100,9 @@
     y1={axis1Pos}
     y2={axis2Pos}
     stroke="black"
+    opacity={shouldReduceOpacity
+      ? $drawConfig.missingValuesConfiguration.missingValueOpacity
+      : 1}
   />
   {#if shouldDrawGlyph}
     <circle
