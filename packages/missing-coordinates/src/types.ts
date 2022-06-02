@@ -28,6 +28,7 @@ export class MissingValuesConfiguraion {
   imputationNeighbors = 2;
   glyphRadius = 4;
   missingValueOpacity = 0.1;
+  strokeDasharray = "5 5";
 }
 
 export enum TopBottomPosition {
