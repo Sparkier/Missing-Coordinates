@@ -1,38 +1,36 @@
-export default function (): (value: string | number) => string {
+export default class ScaleOrdinal {
   // mapping from domain values to index.
-  let domainIndex = new Map();
+  private domainIndex = new Map();
   // domain of possible values
-  let domain: string[] = [];
+  private domainItems: string[] = [];
   // range to be projected to
-  let range: string[] = [];
+  private rangeItems: string[] = [];
 
-  const scale = (value: string | number) => {
-    const index = domainIndex.get(value.toString());
+  public scale(value: string | number): string | null {
+    const index = this.domainIndex.get(value.toString());
     if (index === undefined) {
       return null;
     }
-    return range[index % range.length];
-  };
+    return this.rangeItems[index % this.rangeItems.length];
+  }
 
-  scale.domain = (newDomain: string[] | number[]) => {
-    domain = [];
-    domainIndex = new Map();
+  public domain(newDomain: string[] | number[]): ScaleOrdinal {
+    this.domainItems = [];
+    this.domainIndex = new Map();
 
     newDomain.forEach((value) => {
       const stringValue = value.toString();
-      if (!domainIndex.has(stringValue)) {
-        domainIndex.set(stringValue, domain.length);
-        domain.push(stringValue);
+      if (!this.domainIndex.has(stringValue)) {
+        this.domainIndex.set(stringValue, this.domainItems.length);
+        this.domainItems.push(stringValue);
       }
     });
 
-    return scale;
-  };
+    return this;
+  }
 
-  scale.range = (newRange: string[]) => {
-    range = newRange;
-    return scale;
-  };
-
-  return scale;
+  public range(newRange: string[]): ScaleOrdinal {
+    this.rangeItems = newRange;
+    return this;
+  }
 }
