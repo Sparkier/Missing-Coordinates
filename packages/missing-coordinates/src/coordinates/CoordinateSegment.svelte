@@ -41,13 +41,16 @@
 
   function getPostionForMissingValue(axis: AxisDescriptor): number | undefined {
     if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
-      return $drawConfig.axisHeight + $drawConfig.missingValuesAxisSpacing;
+      return (
+        $drawConfig.axisHeight +
+        $drawConfig.missingValuesConfiguration.missingValuesAxisSpacing
+      );
     } else if ($drawConfig.concept === Concept.IMPUTATION) {
       const value = imputeValueForAxis(
         $data,
         axis,
         coordinate,
-        $drawConfig.imputationNeighbors,
+        $drawConfig.missingValuesConfiguration.imputationNeighbors,
         $axes
       );
       if (axis.categorical && axis.categoricalItems !== undefined) {
@@ -99,7 +102,7 @@
     <circle
       cx={axis2.offset}
       cy={axis2Pos}
-      r={$drawConfig.glyphRadius}
+      r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke="black"
     />
@@ -108,7 +111,7 @@
     <circle
       cx={axis1.offset}
       cy={axis1Pos}
-      r={$drawConfig.glyphRadius}
+      r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke="black"
     />

@@ -37,9 +37,11 @@ const defaultArgs = {
     fontSize: 12,
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
-    missingValuesAxisSpacing: 35,
-    imputationNeighbors: 2,
-    glyphRadius: 4,
+    missingValuesConfiguration: {
+      missingValuesAxisSpacing: 35,
+      imputationNeighbors: 2,
+      glyphRadius: 4,
+    },
   },
 };
 
