@@ -8,6 +8,11 @@
 
 {#each $axes as axis, index}
   {#if index < $axes.length - 1}
-    <CoordinateSegment {coordinate} axis1={axis} axis2={$axes[index + 1]} />
+    <CoordinateSegment
+      {coordinate}
+      axis1={axis}
+      axis2={$axes[index + 1]}
+      axis1Index={index}
+    />
   {/if}
 {/each}
