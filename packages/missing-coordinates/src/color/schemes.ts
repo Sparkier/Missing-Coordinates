@@ -1,4 +1,4 @@
-export const SchemeCategorical = {
+export const schemeCategorical = {
   Category10: [
     "#1F77B4",
     "#FF7F0E",
