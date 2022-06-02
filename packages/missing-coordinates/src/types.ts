@@ -8,6 +8,7 @@ export class DrawConfiguration {
   variation: Variation = Variation.DEFAULT;
   concept: Concept = Concept.INFORMATION_REMOVAL;
   missingValuesConfiguration = new MissingValuesConfiguraion();
+  drawingOrder: DrawingOrder = DrawingOrder.RANDOM;
 }
 
 export class AxisLabelConfiguration {
@@ -48,6 +49,11 @@ export enum Concept {
   INFORMATION_REMOVAL,
   MISSING_VALUES_AXIS,
   IMPUTATION,
+}
+
+export enum DrawingOrder {
+  RANDOM,
+  ORDERED,
 }
 
 export type Margin = {

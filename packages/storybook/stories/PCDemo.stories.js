@@ -1,5 +1,10 @@
 import PCDemo from "./PCDemo.svelte";
-import { TopBottomPosition, Variation, Concept } from "missing-coordinates";
+import {
+  TopBottomPosition,
+  Variation,
+  Concept,
+  DrawingOrder,
+} from "missing-coordinates";
 import penguins from "./penguins.json";
 import sample from "./sample.json";
 export default {
@@ -37,6 +42,7 @@ const defaultArgs = {
     fontSize: 12,
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
+    drawingOrder: DrawingOrder.RANDOM,
     missingValuesConfiguration: {
       missingValuesAxisSpacing: 35,
       imputationNeighbors: 2,
