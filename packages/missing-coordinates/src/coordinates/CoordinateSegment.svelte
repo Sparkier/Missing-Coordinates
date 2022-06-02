@@ -23,6 +23,9 @@
   // Check whether the opacity of the line segment should be reduced.
   $: shouldReduceOpacity =
     $drawConfig.variation === Variation.OPACITY && (isAxis1Null || isAxis2Null);
+  // Check whether the line segment should be dashed.
+  $: shouldDashStroke =
+    $drawConfig.variation === Variation.DASHED && (isAxis1Null || isAxis2Null);
   // Set the stroke to the appropriate color/gradient.
   $: stroke = getStroke($drawConfig.variation, isAxis1Null, isAxis2Null);
 
@@ -129,6 +132,9 @@
     opacity={shouldReduceOpacity
       ? $drawConfig.missingValuesConfiguration.missingValueOpacity
       : 1}
+    stroke-dasharray={shouldDashStroke
+      ? $drawConfig.missingValuesConfiguration.strokeDasharray
+      : ""}
   />
   {#if shouldDrawGlyph}
     <circle
