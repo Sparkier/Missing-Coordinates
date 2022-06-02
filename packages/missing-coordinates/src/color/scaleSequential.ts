@@ -9,6 +9,10 @@ export default class ScaleSequential {
   private interpolateFn: ((t: number) => HSL) | null = null;
 
   public valueAt(value: number): string | null {
+    if (this.interpolateFn === null) {
+      return null;
+    }
+
     const min = Math.min(this.domainExtrema.start, this.domainExtrema.end);
     const max = Math.max(this.domainExtrema.start, this.domainExtrema.end);
     const isWithinDomain = value >= min && value <= max;
@@ -28,10 +32,7 @@ export default class ScaleSequential {
       normalizedT = 1 - normalizedT;
     }
 
-    if (this.interpolateFn !== null) {
-      return this.interpolateFn(normalizedT).hex();
-    }
-    return null;
+    return this.interpolateFn(normalizedT).hex();
   }
 
   public domain(newDomain: [number, number]): ScaleSequential {
