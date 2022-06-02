@@ -24,14 +24,12 @@ export default class ScaleSequential {
     }
 
     let normalizedT = (t - min) / (max - min);
-    console.log(normalizedT);
     if (this.domainExtrema.start > this.domainExtrema.end) {
       normalizedT = 1 - normalizedT;
     }
 
     if (this.interpolateFn !== null) {
       const hsl = this.interpolateFn(normalizedT);
-      console.log(hsl.h, hsl.s, hsl.l);
       return this.interpolateFn(normalizedT).hex();
     }
     return null;
