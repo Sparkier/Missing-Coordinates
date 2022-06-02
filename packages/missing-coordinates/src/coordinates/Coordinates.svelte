@@ -13,7 +13,7 @@
    * Shuffle coordinate order.
    *
    * @param coordinates the coordinates to be shuffled.
-   * @returns shuffled veresion of the coordinates as new array.
+   * @returns shuffled version of the coordinates as new array.
    */
   function shuffleCoordinates(coordinates: Coord[]): Coord[] {
     const coords = [...coordinates];
