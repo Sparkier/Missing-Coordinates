@@ -23,6 +23,8 @@
   // Check whether the opacity of the line segment should be reduced.
   $: shouldReduceOpacity =
     $drawConfig.variation === Variation.OPACITY && (isAxis1Null || isAxis2Null);
+  // Set the stroke to the appropriate color/gradient.
+  $: stroke = getStroke($drawConfig.variation, isAxis1Null, isAxis2Null);
 
   function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
     const value = coordinate.values[axis.name];
@@ -91,6 +93,30 @@
       $drawConfig.axisHeight
     );
   }
+
+  function getStroke(
+    variation: Variation,
+    axis1Null: boolean,
+    axis2Null: boolean
+  ) {
+    // If the gradient variant is used, apply gradients.
+    if (variation === Variation.GRADIENT) {
+      // Completely transparent
+      if (axis1Null && axis2Null) {
+        return "url(#missingGradientNull)";
+      }
+      // Increasing opacity
+      if (axis1Null) {
+        return "url(#missingGradientIncreasing)";
+      }
+      // Decreasing opacity
+      if (axis2Null) {
+        return "url(#missingGradientDecreasing)";
+      }
+    }
+    // Apply plain color.
+    return "black";
+  }
 </script>
 
 {#if axis1Pos !== undefined && axis2Pos !== undefined}
@@ -99,7 +125,7 @@
     x2={axis2.offset}
     y1={axis1Pos}
     y2={axis2Pos}
-    stroke="black"
+    {stroke}
     opacity={shouldReduceOpacity
       ? $drawConfig.missingValuesConfiguration.missingValueOpacity
       : 1}
