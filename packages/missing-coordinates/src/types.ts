@@ -7,9 +7,7 @@ export class DrawConfiguration {
   fontSize = 12;
   variation: Variation = Variation.DEFAULT;
   concept: Concept = Concept.INFORMATION_REMOVAL;
-  missingValuesAxisSpacing = 50;
-  imputationNeighbors = 2;
-  glyphRadius = 4;
+  missingValuesConfiguration = new MissingValuesConfiguraion();
 }
 
 export class AxisLabelConfiguration {
@@ -23,6 +21,13 @@ export class AxisAnnotationConfiguration {
   show = true;
   textAnchor = "middle";
   margin = 5;
+}
+
+export class MissingValuesConfiguraion {
+  missingValuesAxisSpacing = 50;
+  imputationNeighbors = 2;
+  glyphRadius = 4;
+  missingValueOpacity = 0.1;
 }
 
 export enum TopBottomPosition {

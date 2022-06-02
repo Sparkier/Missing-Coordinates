@@ -44,7 +44,8 @@ export const height = derived(
     // and remove half the height of the labels, since they are above.
     const missingAxisHeight =
       $drawConfiguration.concept === Concept.MISSING_VALUES_AXIS
-        ? $drawConfiguration.missingValuesAxisSpacing -
+        ? $drawConfiguration.missingValuesConfiguration
+            .missingValuesAxisSpacing -
           $axisAnnotationHeight / 2
         : 0;
     return (

@@ -20,6 +20,9 @@
     axis1Index === 0 &&
     $drawConfig.variation === Variation.GLYPH &&
     isAxis1Null;
+  // Check whether the opacity of the line segment should be reduced.
+  $: shouldReduceOpacity =
+    $drawConfig.variation === Variation.OPACITY && (isAxis1Null || isAxis2Null);
 
   function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
     const value = coordinate.values[axis.name];
@@ -41,13 +44,16 @@
 
   function getPostionForMissingValue(axis: AxisDescriptor): number | undefined {
     if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
-      return $drawConfig.axisHeight + $drawConfig.missingValuesAxisSpacing;
+      return (
+        $drawConfig.axisHeight +
+        $drawConfig.missingValuesConfiguration.missingValuesAxisSpacing
+      );
     } else if ($drawConfig.concept === Concept.IMPUTATION) {
       const value = imputeValueForAxis(
         $data,
         axis,
         coordinate,
-        $drawConfig.imputationNeighbors,
+        $drawConfig.missingValuesConfiguration.imputationNeighbors,
         $axes
       );
       if (axis.categorical && axis.categoricalItems !== undefined) {
@@ -94,12 +100,15 @@
     y1={axis1Pos}
     y2={axis2Pos}
     stroke="black"
+    opacity={shouldReduceOpacity
+      ? $drawConfig.missingValuesConfiguration.missingValueOpacity
+      : 1}
   />
   {#if shouldDrawGlyph}
     <circle
       cx={axis2.offset}
       cy={axis2Pos}
-      r={$drawConfig.glyphRadius}
+      r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke="black"
     />
@@ -108,7 +117,7 @@
     <circle
       cx={axis1.offset}
       cy={axis1Pos}
-      r={$drawConfig.glyphRadius}
+      r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke="black"
     />
