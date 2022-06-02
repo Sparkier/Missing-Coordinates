@@ -1,15 +1,12 @@
 import type { HSL } from "./sequentialColorInterpolators";
 
 export default class ScaleSequential {
-  // domain of possible values
   private domainExtrema: {
     start: number;
     end: number;
   } = { start: 0, end: 0 };
 
   private interpolateFn: ((t: number) => HSL) | null = null;
-  // range to be projected to
-  // private rangeItems: string[] = [];
 
   public scale(t: number): string | null {
     const min = Math.min(this.domainExtrema.start, this.domainExtrema.end);
