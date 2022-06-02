@@ -38,6 +38,7 @@ const defaultArgs = {
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
     missingValuesAxisSpacing: 35,
+    imputationNeighbors: 2,
   },
 };
 
