@@ -8,7 +8,7 @@ export default class ScaleSequential {
 
   private interpolateFn: ((t: number) => HSL) | null = null;
 
-  public scale(t: number): string | null {
+  public valueAt(t: number): string | null {
     const min = Math.min(this.domainExtrema.start, this.domainExtrema.end);
     const max = Math.max(this.domainExtrema.start, this.domainExtrema.end);
     const isWithinDomain = t >= min && t <= max;
