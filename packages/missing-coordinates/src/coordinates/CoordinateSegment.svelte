@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AxisDescriptor, Coordinate, Variation } from "../types";
   import { Concept } from "../types";
-  import { axes, data, drawConfig } from "../stores";
+  import { axes, data, drawConfig, colorScale } from "../stores";
   import { imputeValueForAxis } from "./imputation";
 
   export let coordinate: Coordinate;
@@ -97,6 +97,21 @@
     );
   }
 
+  function getColor(): string {
+    const value = coordinate.values[$drawConfig.coloring.coloringAxis];
+    if ($colorScale === null) {
+      return "black";
+    }
+    // TODO: value can be string or number. 
+    // Scales should be rewritten to be generic and parse values themself.
+    const color = $colorScale.valueAt(value);
+    if (color === null) {
+      return "black";
+    }
+    return color;
+  }
+
+
   function getStroke(
     variation: Variation,
     axis1Null: boolean,
@@ -117,8 +132,9 @@
         return "url(#missingGradientDecreasing)";
       }
     }
+    const color = getColor();
     // Apply plain color.
-    return "black";
+    return getColor();
   }
 </script>
 
@@ -142,7 +158,7 @@
       cy={axis2Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke="black"
+      stroke={getColor()}
     />
   {/if}
   {#if shouldDrawGlyphFirstAxis}
@@ -151,7 +167,7 @@
       cy={axis1Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke="black"
+      stroke={getColor()}
     />
   {/if}
 {/if}
