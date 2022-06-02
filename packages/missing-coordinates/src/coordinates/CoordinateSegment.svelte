@@ -11,13 +11,15 @@
 
   $: axis1Pos = getCoordinatePosition(axis1);
   $: axis2Pos = getCoordinatePosition(axis2);
-  $: axis1Null = coordinate.values[axis1.name] === null;
-  $: axis2Null = coordinate.values[axis2.name] === null;
+  $: isAxis1Null = coordinate.values[axis1.name] === null;
+  $: isAxis2Null = coordinate.values[axis2.name] === null;
   // Check if a glyph should be drawn for the end of the segment.
-  $: drawGlyph = $drawConfig.variation === Variation.GLYPH && axis2Null;
+  $: shouldDrawGlyph = $drawConfig.variation === Variation.GLYPH && isAxis2Null;
   // Special case if we need to draw a glyph for the first axis.
-  $: drawGlyphFirstAxis =
-    axis1Index === 0 && $drawConfig.variation === Variation.GLYPH && axis1Null;
+  $: shouldDrawGlyphFirstAxis =
+    axis1Index === 0 &&
+    $drawConfig.variation === Variation.GLYPH &&
+    isAxis1Null;
 
   function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
     const value = coordinate.values[axis.name];
@@ -93,7 +95,7 @@
     y2={axis2Pos}
     stroke="black"
   />
-  {#if drawGlyph}
+  {#if shouldDrawGlyph}
     <circle
       cx={axis2.offset}
       cy={axis2Pos}
@@ -102,7 +104,7 @@
       stroke="black"
     />
   {/if}
-  {#if drawGlyphFirstAxis}
+  {#if shouldDrawGlyphFirstAxis}
     <circle
       cx={axis1.offset}
       cy={axis1Pos}
