@@ -6,7 +6,7 @@ export default class ScaleOrdinal {
   // range to be projected to
   private rangeItems: string[] = [];
 
-  public scale(value: string | number): string | null {
+  public valueAt(value: string | number): string | null {
     const index = this.domainIndex.get(value.toString());
     if (index === undefined) {
       return null;
