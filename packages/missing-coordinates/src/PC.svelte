@@ -4,6 +4,8 @@
   import AxisLabels from "./axes/AxisLabels.svelte";
   import Coordinates from "./coordinates/Coordinates.svelte";
   import MissingValuesAxis from "./axes/MissingValuesAxis.svelte";
+  import Gradients from "./gradients/Gradients.svelte";
+
   import {
     width,
     height,
@@ -13,7 +15,7 @@
     data as storeData,
   } from "./stores";
   import type { Data } from "./types";
-  import { DrawConfiguration, Concept } from "./types";
+  import { DrawConfiguration, Concept, Variation } from "./types";
 
   export let drawConfiguration: DrawConfiguration = new DrawConfiguration();
   export let data: Data;
@@ -24,6 +26,11 @@
 
 <main>
   <svg width={$width} height={$height}>
+    {#if $drawConfig.variation === Variation.GRADIENT}
+      <defs>
+        <Gradients />
+      </defs>
+    {/if}
     <g
       id="main-group"
       transform={`translate(${$drawConfig.margin.left}, ${$drawConfig.margin.top})`}
