@@ -82,7 +82,12 @@ const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
   return funct;
 };
 
-export const warm = hslInterpolator(
+export const interpolateWarm = hslInterpolator(
   new HSL(-100, 0.75, 0.35),
+  new HSL(80, 1.5, 0.8)
+);
+
+export const interpolateCool = hslInterpolator(
+  new HSL(260, 0.75, 0.35),
   new HSL(80, 1.5, 0.8)
 );
