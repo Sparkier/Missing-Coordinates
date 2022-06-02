@@ -71,23 +71,22 @@ const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
   const l = colorInterpolator(start.l, end.l);
   const opacity = colorInterpolator(start.opacity, end.opacity);
 
-  const funct: interpolateFunction = (t: number) => {
+  return (t: number) => {
     start.h = h(t);
     start.s = s(t);
     start.l = l(t);
     start.opacity = opacity(t);
     return start;
   };
-
-  return funct;
 };
 
-export const interpolateWarm = hslInterpolator(
-  new HSL(-100, 0.75, 0.35),
-  new HSL(80, 1.5, 0.8)
-);
-
-export const interpolateCool = hslInterpolator(
-  new HSL(260, 0.75, 0.35),
-  new HSL(80, 1.5, 0.8)
-);
+export const interpolators = {
+  interpolateWarm: hslInterpolator(
+    new HSL(-100, 0.75, 0.35),
+    new HSL(80, 1.5, 0.8)
+  ),
+  interpolateCool: hslInterpolator(
+    new HSL(260, 0.75, 0.35),
+    new HSL(80, 1.5, 0.8)
+  ),
+};
