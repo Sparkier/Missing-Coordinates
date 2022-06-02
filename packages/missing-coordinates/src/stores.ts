@@ -1,6 +1,9 @@
 import { writable, derived } from "svelte/store";
 import { Data, AxisDescriptor, Concept } from "./types";
 import { TopBottomPosition, DrawConfiguration, Coordinate } from "./types";
+import { ScaleOrdinal, ScaleSequential } from "./color/scales";
+import { schemeCategorical } from "./color/schemes";
+import { interpolators } from "./color/sequentialColorInterpolators";
 
 export const drawConfig = writable<DrawConfiguration>(new DrawConfiguration());
 export const data = writable<Data>({ name: "", axes: [] });
@@ -56,6 +59,32 @@ export const height = derived(
       $axisAnnotationHeight +
       missingAxisHeight
     );
+  }
+);
+export const colorScale = derived(
+  [data, drawConfig],
+  ([$data, $drawConfig]) => {
+    const { coloringAxis } = $drawConfig.coloring;
+    const axis = $data.axes.find((axis) => axis.name === coloringAxis);
+    if (!axis) {
+      return null;
+    }
+    const isCategorical = axis.data.every(
+      (val) => val === null || typeof val === "string"
+    );
+
+    if (isCategorical) {
+      return new ScaleOrdinal()
+        .domain(axis.data as string[])
+        .range(schemeCategorical.Category10);
+    } else {
+      const numberValues = axis.data.filter((val) => val !== null) as number[];
+      const min = Math.min(...numberValues);
+      const max = Math.max(...numberValues);
+      return new ScaleSequential()
+        .domain([min, max])
+        .interpolator(interpolators.interpolateWarm);
+    }
   }
 );
 // All axis information.
