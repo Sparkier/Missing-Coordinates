@@ -10,8 +10,6 @@
     if ($colorScale === null || value === null) {
       return "black";
     }
-    // TODO: value can be string or number. 
-    // Scales should be rewritten to be generic and parse values themself.
     const color = $colorScale.valueAt(value);
     if (color === null) {
       return "black";
