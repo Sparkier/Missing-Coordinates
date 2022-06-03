@@ -111,7 +111,6 @@
     return color;
   }
 
-
   function getStroke(
     variation: Variation,
     axis1Null: boolean,
