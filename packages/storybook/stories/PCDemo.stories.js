@@ -5,20 +5,46 @@ import {
   Concept,
   DrawingOrder,
 } from "missing-coordinates";
-import penguins from "./penguins.json";
-import sample from "./sample.json";
+
+import sample from "./datasets/sample.json";
+import airlineSafetyComplete from "./datasets/airline-safety.json";
+import badDriverComplete from "./datasets/bad-drivers.json";
+import irisComplete from "./datasets/iris.json";
+import mpgComplete from "./datasets/mpg.json";
+import penguinsComplete from "./datasets/penguins.json";
+
 export default {
   title: "missing-coordinates/PC",
   component: PCDemo,
   argTypes: {},
 };
 
-const PenguinsTemplate = ({ ...args }) => ({
+const SampleTemplate = ({ ...args }) => ({
   Component: PCDemo,
   props: args,
 });
 
-const SampleTemplate = ({ ...args }) => ({
+const AirlineCompleteTemplate = ({ ...args }) => ({
+  Component: PCDemo,
+  props: args,
+});
+
+const DriverCompleteTemplate = ({ ...args }) => ({
+  Component: PCDemo,
+  props: args,
+});
+
+const IrisCompleteTemplate = ({ ...args }) => ({
+  Component: PCDemo,
+  props: args,
+});
+
+const MpgCompleteTemplate = ({ ...args }) => ({
+  Component: PCDemo,
+  props: args,
+});
+
+const PenguinCompleteTemplate = ({ ...args }) => ({
   Component: PCDemo,
   props: args,
 });
@@ -58,14 +84,38 @@ const defaultArgs = {
   },
 };
 
-export const PenguinsDemo = PenguinsTemplate.bind({});
-PenguinsDemo.args = {
-  data: penguins,
+export const Sample = SampleTemplate.bind({});
+Sample.args = {
+  data: sample,
   ...defaultArgs,
 };
 
-export const SampleDemo = SampleTemplate.bind({});
-SampleDemo.args = {
-  data: sample,
+export const AirlineComplete = AirlineCompleteTemplate.bind({});
+AirlineComplete.args = {
+  data: airlineSafetyComplete,
+  ...defaultArgs,
+};
+
+export const DriverComplete = DriverCompleteTemplate.bind({});
+DriverComplete.args = {
+  data: badDriverComplete,
+  ...defaultArgs,
+};
+
+export const IrisComplete = IrisCompleteTemplate.bind({});
+IrisComplete.args = {
+  data: irisComplete,
+  ...defaultArgs,
+};
+
+export const MpgComplete = MpgCompleteTemplate.bind({});
+MpgComplete.args = {
+  data: mpgComplete,
+  ...defaultArgs,
+};
+
+export const PenguinComplete = PenguinCompleteTemplate.bind({});
+PenguinComplete.args = {
+  data: penguinsComplete,
   ...defaultArgs,
 };
