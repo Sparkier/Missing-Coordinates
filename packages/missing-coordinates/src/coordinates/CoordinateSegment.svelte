@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AxisDescriptor, Coordinate, Variation } from "../types";
   import { Concept } from "../types";
-  import { axes, data, drawConfig, colorScale } from "../stores";
+  import { axes, data, drawConfig } from "../stores";
   import { imputeValueForAxis } from "./imputation";
 
   export let coordinate: Coordinate;
@@ -97,7 +97,6 @@
       $drawConfig.axisHeight
     );
   }
-
 
   function getStroke(
     variation: Variation,
