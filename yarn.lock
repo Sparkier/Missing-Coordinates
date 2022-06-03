@@ -1905,20 +1905,20 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@storybook/addon-controls@^6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.4.20.tgz#62f63621001616a094d69f1da42d003708a286a6"
-  integrity sha512-Tqq66SCbi2WIiKrkHu3edtg4r8QIdm/RbNB/PwnFuXwkJVt5mAoV9QQUt1zkbzdknU8xTwwgM4cEEfYLfBVm9Q==
+"@storybook/addon-controls@^6.5.6":
+  version "6.5.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.5.6.tgz#bca1e33dd1edb059b6d6b1e1616c60ecdc9eb294"
+  integrity sha512-pJz2ltdL8d9/2wX1XOMdXeGwMNoBX5hIXkNfBCvBfOCmeVEXOczPOZARvwx4QTqmMSu1KikhFIGT64wwoETmBg==
   dependencies:
-    "@storybook/addons" "6.4.20"
-    "@storybook/api" "6.4.20"
-    "@storybook/client-logger" "6.4.20"
-    "@storybook/components" "6.4.20"
-    "@storybook/core-common" "6.4.20"
-    "@storybook/csf" "0.0.2--canary.87bc651.0"
-    "@storybook/node-logger" "6.4.20"
-    "@storybook/store" "6.4.20"
-    "@storybook/theming" "6.4.20"
+    "@storybook/addons" "6.5.6"
+    "@storybook/api" "6.5.6"
+    "@storybook/client-logger" "6.5.6"
+    "@storybook/components" "6.5.6"
+    "@storybook/core-common" "6.5.6"
+    "@storybook/csf" "0.0.2--canary.4566f4d.1"
+    "@storybook/node-logger" "6.5.6"
+    "@storybook/store" "6.5.6"
+    "@storybook/theming" "6.5.6"
     core-js "^3.8.2"
     lodash "^4.17.21"
     ts-dedent "^2.0.0"
