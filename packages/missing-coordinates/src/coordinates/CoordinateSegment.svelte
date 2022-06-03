@@ -99,7 +99,7 @@
 
   function getColor(): string {
     const value = coordinate.values[$drawConfig.coloring.coloringAxis];
-    if ($colorScale === null) {
+    if ($colorScale === null || value === null) {
       return "black";
     }
     // TODO: value can be string or number. 
