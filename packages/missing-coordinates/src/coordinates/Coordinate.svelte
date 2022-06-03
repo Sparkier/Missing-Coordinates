@@ -8,12 +8,12 @@
 
   $: color = getColor(coordinate, $colorScale, $drawConfig.coloring.coloringAxis);
 
-  function getColor(coord: Coordinate, colorScale: ColorScale | null, coloringAxis: string): string {
+  function getColor(coord: Coordinate, scale: ColorScale | null, coloringAxis: string): string {
     const value = coord.values[coloringAxis];
-    if (colorScale === null || value === null) {
+    if (scale === null || value === null) {
       return "black";
     }
-    const color = colorScale.valueAt(value);
+    const color = scale.valueAt(value);
     if (color === null) {
       return "black";
     }
