@@ -4,6 +4,7 @@ import { TopBottomPosition, DrawConfiguration, Coordinate } from "./types";
 import { ScaleOrdinal, ScaleSequential } from "./color/scales";
 import { schemeCategorical } from "./color/schemes";
 import { interpolators } from "./color/sequentialColorInterpolators";
+import type { interpolateFunction } from "./color/sequentialColorInterpolators";
 
 export const drawConfig = writable<DrawConfiguration>(new DrawConfiguration());
 export const data = writable<Data>({ name: "", axes: [] });
@@ -74,16 +75,26 @@ export const colorScale = derived(
     }
 
     if (isCategorical(axis.data)) {
+      let theme = schemeCategorical.get($drawConfig.coloring.ordinalColorTheme);
+      if (theme === undefined) {
+        theme = schemeCategorical.get("Category10");
+      }
       return new ScaleOrdinal()
         .domain(axis.data as string[])
-        .range(schemeCategorical.Category10);
+        .range(theme as string[]);
     } else {
       const numberValues = axis.data.filter((val) => val !== null) as number[];
       const min = Math.min(...numberValues);
       const max = Math.max(...numberValues);
+      let interpolator = interpolators.get(
+        $drawConfig.coloring.sequentialColorTheme
+      );
+      if (interpolator === undefined) {
+        interpolator = interpolators.get("warm");
+      }
       return new ScaleSequential()
         .domain([min, max])
-        .interpolator(interpolators.interpolateWarm);
+        .interpolator(interpolator as interpolateFunction);
     }
   }
 );

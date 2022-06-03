@@ -62,7 +62,7 @@ export class HSL {
   }
 }
 
-type interpolateFunction = (t: number) => HSL;
+export type interpolateFunction = (t: number) => HSL;
 type hslInterpolatorFn = (start: HSL, end: HSL) => interpolateFunction;
 
 const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
@@ -80,13 +80,7 @@ const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
   };
 };
 
-export const interpolators = {
-  interpolateWarm: hslInterpolator(
-    new HSL(-100, 0.75, 0.35),
-    new HSL(80, 1.5, 0.8)
-  ),
-  interpolateCool: hslInterpolator(
-    new HSL(260, 0.75, 0.35),
-    new HSL(80, 1.5, 0.8)
-  ),
-};
+export const interpolators = new Map([
+  ["warm", hslInterpolator(new HSL(-100, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
+  ["cool", hslInterpolator(new HSL(260, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
+]);
