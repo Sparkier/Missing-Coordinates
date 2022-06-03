@@ -1,3 +1,5 @@
+![Teaser Image](https://github.com/Sparkier/Missing-Coordinates/blob/70e6d731444b108e6bff597dac0cbbb15271d211/.github/readme_pictures/teaser.png)
+
 # Missing Coordinates
 
 Implementation of a novel extension to Parallel Coordinates, introcuded in the Paper:
