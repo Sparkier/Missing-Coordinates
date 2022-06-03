@@ -8,6 +8,7 @@
   export let axis1: AxisDescriptor;
   export let axis2: AxisDescriptor;
   export let axis1Index: number;
+  export let color: string;
 
   $: axis1Pos = getCoordinatePosition(axis1);
   $: axis2Pos = getCoordinatePosition(axis2);
@@ -97,19 +98,6 @@
     );
   }
 
-  function getColor(): string {
-    const value = coordinate.values[$drawConfig.coloring.coloringAxis];
-    if ($colorScale === null || value === null) {
-      return "black";
-    }
-    // TODO: value can be string or number. 
-    // Scales should be rewritten to be generic and parse values themself.
-    const color = $colorScale.valueAt(value);
-    if (color === null) {
-      return "black";
-    }
-    return color;
-  }
 
   function getStroke(
     variation: Variation,
@@ -132,7 +120,7 @@
       }
     }
     // Apply plain color.
-    return getColor();
+    return color;
   }
 </script>
 
@@ -156,7 +144,7 @@
       cy={axis2Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke={getColor()}
+      stroke={color}
     />
   {/if}
   {#if shouldDrawGlyphFirstAxis}
@@ -165,7 +153,7 @@
       cy={axis1Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke={getColor()}
+      stroke={color}
     />
   {/if}
 {/if}
