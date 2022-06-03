@@ -1,6 +1,7 @@
 import type { HSL } from "./sequentialColorInterpolators";
+import type { ColorScale } from "./scales";
 
-export default class ScaleSequential {
+export default class ScaleSequential implements ColorScale {
   private domainExtrema: {
     start: number;
     end: number;
@@ -8,10 +9,16 @@ export default class ScaleSequential {
 
   private interpolateFn: ((t: number) => HSL) | null = null;
 
-  public valueAt(value: number): string | null {
+  public valueAt(value: number | string): string | null {
     if (this.interpolateFn === null) {
       return null;
     }
+
+    if (value === null || typeof value === "string") {
+      return null;
+    }
+
+    value = value as number;
 
     const min = Math.min(this.domainExtrema.start, this.domainExtrema.end);
     const max = Math.max(this.domainExtrema.start, this.domainExtrema.end);

@@ -1,9 +1,16 @@
 import { writable, derived } from "svelte/store";
 import { Data, AxisDescriptor, Concept } from "./types";
 import { TopBottomPosition, DrawConfiguration, Coordinate } from "./types";
+import { ScaleOrdinal, ScaleSequential } from "./color/scales";
+import { schemeCategorical } from "./color/schemes";
+import { interpolators } from "./color/sequentialColorInterpolators";
+import type { interpolateFunction } from "./color/sequentialColorInterpolators";
 
 export const drawConfig = writable<DrawConfiguration>(new DrawConfiguration());
 export const data = writable<Data>({ name: "", axes: [] });
+
+const isCategorical = (data: (number | string | null)[]) =>
+  data.every((val) => val === null || typeof val === "string");
 
 // Height of the labels we draw.
 export const axisLabelHeight = derived(drawConfig, ($drawConfiguration) =>
@@ -58,20 +65,51 @@ export const height = derived(
     );
   }
 );
+export const colorScale = derived(
+  [data, drawConfig],
+  ([$data, $drawConfig]) => {
+    const { coloringAxis } = $drawConfig.coloring;
+    const axis = $data.axes.find((axis) => axis.name === coloringAxis);
+    if (!axis) {
+      return null;
+    }
+
+    if (isCategorical(axis.data)) {
+      let theme = schemeCategorical.get($drawConfig.coloring.ordinalColorTheme);
+      if (theme === undefined) {
+        theme = schemeCategorical.get("Category10");
+      }
+      return new ScaleOrdinal()
+        .domain(axis.data as string[])
+        .range(theme as string[]);
+    } else {
+      const numberValues = axis.data.filter((val) => val !== null) as number[];
+      const min = Math.min(...numberValues);
+      const max = Math.max(...numberValues);
+      let interpolator = interpolators.get(
+        $drawConfig.coloring.sequentialColorTheme
+      );
+      if (interpolator === undefined) {
+        interpolator = interpolators.get("warm");
+      }
+      return new ScaleSequential()
+        .domain([min, max])
+        .interpolator(interpolator as interpolateFunction);
+    }
+  }
+);
 // All axis information.
 export const axes = derived([data, drawConfig], ([$data, $drawConfig]) =>
   $data.axes.map((value, index) => {
-    const stringData = value.data.every(
-      (val) => val === null || typeof val === "string"
-    );
-    const numberValues = stringData
+    const isCat = isCategorical(value.data);
+    const numberValues = isCat
       ? undefined
       : (value.data.filter((val) => val !== null) as number[]);
     return {
       name: value.name,
       offset: index * $drawConfig.axesSpacing,
-      categorical: stringData,
-      categoricalItems: stringData
+      categorical: isCat,
+      categoricalItems: isCat
         ? [...new Set(value.data.filter((val) => val !== null))]
         : undefined,
       extremes:

@@ -9,6 +9,11 @@ export class DrawConfiguration {
   concept: Concept = Concept.INFORMATION_REMOVAL;
   missingValuesConfiguration = new MissingValuesConfiguraion();
   drawingOrder: DrawingOrder = DrawingOrder.RANDOM;
+  coloring = {
+    coloringAxis: "dim 1",
+    ordinalColorTheme: "Category10",
+    sequentialColorTheme: "cool",
+  };
 }
 
 export class AxisLabelConfiguration {

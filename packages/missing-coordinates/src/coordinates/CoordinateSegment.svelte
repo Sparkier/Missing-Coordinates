@@ -8,6 +8,7 @@
   export let axis1: AxisDescriptor;
   export let axis2: AxisDescriptor;
   export let axis1Index: number;
+  export let color: string;
 
   $: axis1Pos = getCoordinatePosition(axis1);
   $: axis2Pos = getCoordinatePosition(axis2);
@@ -118,7 +119,7 @@
       }
     }
     // Apply plain color.
-    return "black";
+    return color;
   }
 </script>
 
@@ -142,7 +143,7 @@
       cy={axis2Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke="black"
+      stroke={color}
     />
   {/if}
   {#if shouldDrawGlyphFirstAxis}
@@ -151,7 +152,7 @@
       cy={axis1Pos}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
-      stroke="black"
+      stroke={color}
     />
   {/if}
 {/if}
