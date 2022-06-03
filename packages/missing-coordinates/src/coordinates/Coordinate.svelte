@@ -2,15 +2,18 @@
   import CoordinateSegment from "./CoordinateSegment.svelte";
   import type { Coordinate } from "../types";
   import { axes, drawConfig, colorScale } from "../stores";
+  import type { ColorScale } from "./color/scales";
 
   export let coordinate: Coordinate;
 
-  function getColor(): string {
-    const value = coordinate.values[$drawConfig.coloring.coloringAxis];
-    if ($colorScale === null || value === null) {
+  $: color = getColor(coordinate, $colorScale, $drawConfig.coloring.coloringAxis);
+
+  function getColor(coord: Coordinate, colorScale: ColorScale | null, coloringAxis: string): string {
+    const value = coord.values[coloringAxis];
+    if (colorScale === null || value === null) {
       return "black";
     }
-    const color = $colorScale.valueAt(value);
+    const color = colorScale.valueAt(value);
     if (color === null) {
       return "black";
     }
@@ -25,7 +28,7 @@
       axis1={axis}
       axis2={$axes[index + 1]}
       axis1Index={index}
-      color={getColor()}
+      color={color}
     />
   {/if}
 {/each}
