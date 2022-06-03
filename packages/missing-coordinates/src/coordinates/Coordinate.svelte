@@ -2,7 +2,7 @@
   import CoordinateSegment from "./CoordinateSegment.svelte";
   import type { Coordinate } from "../types";
   import { axes, drawConfig, colorScale } from "../stores";
-  import type { ColorScale } from "./color/scales";
+  import type { ColorScale } from "../color/scales";
 
   export let coordinate: Coordinate;
 
