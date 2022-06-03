@@ -107,15 +107,15 @@
     if (variation === Variation.GRADIENT) {
       // Completely transparent
       if (axis1Null && axis2Null) {
-        return "url(#missingGradientNull)";
+        return `url(#missingGradientNull-${color.replace('#', '')})`;
       }
       // Increasing opacity
       if (axis1Null) {
-        return "url(#missingGradientIncreasing)";
+        return `url(#missingGradientIncreasing-${color.replace('#', '')})`;
       }
       // Decreasing opacity
       if (axis2Null) {
-        return "url(#missingGradientDecreasing)";
+        return `url(#missingGradientDecreasing-${color.replace('#', '')})`;
       }
     }
     // Apply plain color.
