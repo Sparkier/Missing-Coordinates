@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Data, DrawConfiguration } from "../types";
+  import type { Data, DrawConfiguration, AxisData } from "../types";
   import type { ColorScale } from "../color/scales";
   import { drawConfig, data, colorScale } from "../stores";
 
