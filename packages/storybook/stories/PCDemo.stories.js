@@ -43,6 +43,11 @@ const defaultArgs = {
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
     drawingOrder: DrawingOrder.RANDOM,
+    coloring: {
+      coloringAxis: "species",
+      ordinalColorTheme: "Category10",
+      sequentialColorTheme: "cool",
+    },
     missingValuesConfiguration: {
       missingValuesAxisSpacing: 35,
       imputationNeighbors: 2,
