@@ -131,7 +131,6 @@
         return "url(#missingGradientDecreasing)";
       }
     }
-    const color = getColor();
     // Apply plain color.
     return getColor();
   }
