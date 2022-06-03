@@ -8,6 +8,9 @@ import { interpolators } from "./color/sequentialColorInterpolators";
 export const drawConfig = writable<DrawConfiguration>(new DrawConfiguration());
 export const data = writable<Data>({ name: "", axes: [] });
 
+const isCategorical = (data: (number | string | null)[]) =>
+  data.every((val) => val === null || typeof val === "string");
+
 // Height of the labels we draw.
 export const axisLabelHeight = derived(drawConfig, ($drawConfiguration) =>
   $drawConfiguration.axisLabelConfiguration.show
@@ -69,11 +72,8 @@ export const colorScale = derived(
     if (!axis) {
       return null;
     }
-    const isCategorical = axis.data.every(
-      (val) => val === null || typeof val === "string"
-    );
 
-    if (isCategorical) {
+    if (isCategorical(axis.data)) {
       return new ScaleOrdinal()
         .domain(axis.data as string[])
         .range(schemeCategorical.Category10);
@@ -90,17 +90,15 @@ export const colorScale = derived(
 // All axis information.
 export const axes = derived([data, drawConfig], ([$data, $drawConfig]) =>
   $data.axes.map((value, index) => {
-    const stringData = value.data.every(
-      (val) => val === null || typeof val === "string"
-    );
-    const numberValues = stringData
+    const isCat = isCategorical(value.data);
+    const numberValues = isCat
       ? undefined
       : (value.data.filter((val) => val !== null) as number[]);
     return {
       name: value.name,
       offset: index * $drawConfig.axesSpacing,
-      categorical: stringData,
-      categoricalItems: stringData
+      categorical: isCat,
+      categoricalItems: isCat
         ? [...new Set(value.data.filter((val) => val !== null))]
         : undefined,
       extremes:
