@@ -1,4 +1,6 @@
-export default class ScaleOrdinal {
+import type { ColorScale } from "./scales";
+
+export default class ScaleOrdinal implements ColorScale {
   // mapping from domain values to index.
   private domainIndex = new Map();
   // domain of possible values
