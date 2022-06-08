@@ -25,7 +25,7 @@ const colorInterpolator = (a: number, b: number) => {
   return d ? scaleLinear(a, d) : constant(isNaN(a) ? b : a);
 };
 
-export class HSL {
+export class Cubehelix {
   h = 0;
   s = 0;
   l = 0;
@@ -65,10 +65,16 @@ export class HSL {
   }
 }
 
-export type interpolateFunction = (t: number) => HSL;
-type hslInterpolatorFn = (start: HSL, end: HSL) => interpolateFunction;
+export type interpolateFunction = (t: number) => Cubehelix;
+type hslInterpolatorFn = (
+  start: Cubehelix,
+  end: Cubehelix
+) => interpolateFunction;
 
-const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
+const hslInterpolator: hslInterpolatorFn = (
+  start: Cubehelix,
+  end: Cubehelix
+) => {
   const h = hueInterpolator(start.h, end.h);
   const s = colorInterpolator(start.s, end.s);
   const l = colorInterpolator(start.l, end.l);
@@ -84,6 +90,18 @@ const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
 };
 
 export const interpolators = new Map([
-  ["warm", hslInterpolator(new HSL(-100, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
-  ["cool", hslInterpolator(new HSL(260, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
+  [
+    "warm",
+    hslInterpolator(
+      new Cubehelix(-100, 0.75, 0.35),
+      new Cubehelix(80, 1.5, 0.8)
+    ),
+  ],
+  [
+    "cool",
+    hslInterpolator(
+      new Cubehelix(260, 0.75, 0.35),
+      new Cubehelix(80, 1.5, 0.8)
+    ),
+  ],
 ]);
