@@ -5,6 +5,7 @@
   import Coordinates from "./coordinates/Coordinates.svelte";
   import MissingValuesAxis from "./axes/MissingValuesAxis.svelte";
   import Gradients from "./gradients/Gradients.svelte";
+  import type { ColorScale } from "./color/scales";
 
   import {
     width,
@@ -27,9 +28,7 @@
 <main>
   <svg width={$width} height={$height}>
     {#if $drawConfig.variation === Variation.GRADIENT}
-      <defs>
-        <Gradients />
-      </defs>
+      <Gradients />
     {/if}
     <g
       id="main-group"
