@@ -20,6 +20,7 @@
   "dependencies": {
     "@storybook/source-loader": "6.5.6",
     "@storybook/svelte": "6.5.6",
+    "flat": "^5.0.2",
     "svelte": "^3.48.0"
   },
   "devDependencies": {
