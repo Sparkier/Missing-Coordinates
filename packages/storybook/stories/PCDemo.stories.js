@@ -69,6 +69,7 @@ const defaultArgs = {
     variation: Variation.DEFAULT,
     concept: Concept.INFORMATION_REMOVAL,
     drawingOrder: DrawingOrder.RANDOM,
+    lineOpacity: 0.5,
     coloring: {
       coloringAxis: "species",
       ordinalColorTheme: "Category10",

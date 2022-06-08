@@ -9,6 +9,7 @@ export class DrawConfiguration {
   concept: Concept = Concept.INFORMATION_REMOVAL;
   missingValuesConfiguration = new MissingValuesConfiguraion();
   drawingOrder: DrawingOrder = DrawingOrder.RANDOM;
+  lineOpacity = 0.5;
   coloring = {
     coloringAxis: "dim 1",
     ordinalColorTheme: "Category10",

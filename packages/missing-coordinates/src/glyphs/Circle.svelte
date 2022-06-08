@@ -18,5 +18,6 @@
     r={$drawConfig.missingValuesConfiguration.glyphRadius}
     fill="white"
     stroke={color}
+    stroke-opacity={$drawConfig.lineOpacity}
   />
 {/if}
