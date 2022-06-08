@@ -29,6 +29,14 @@
     $drawConfig.variation === Variation.DASHED && (isAxis1Null || isAxis2Null);
   // Set the stroke to the appropriate color/gradient.
   $: stroke = getStroke($drawConfig.variation, isAxis1Null, isAxis2Null);
+  // Horizontal gradient lines are invisible in SVG.
+  // (https://stackoverflow.com/questions/13223636/svg-gradient-for-perfectly-horizontal-path)
+  // Therefore, we replace the line with a rect if that is the case.
+  $: lineShouldBeRect =
+    axis1Y === axis2Y &&
+    $drawConfig.variation === Variation.GRADIENT &&
+    $drawConfig.concept === Concept.IMPUTATION &&
+    (isAxis1Null || isAxis2Null);
 
   function getCoordinatePosition(axis: AxisDescriptor): number {
     const value = coordinate.values[axis.name];
@@ -125,19 +133,29 @@
 </script>
 
 {#if axis1Y >= 0 && axis2Y >= 0}
-  <line
-    x1={axis1.offset}
-    x2={axis2.offset}
+  {#if lineShouldBeRect}
+    <rect
+      x={axis1.offset}
+      y={axis1Y - 0.5}
+      height={1}
+      width={axis2.offset - axis1.offset}
+      fill={stroke}
+    />
+  {:else}
+    <line
+      x1={axis1.offset}
+      x2={axis2.offset}
       y1={axis1Y}
       y2={axis2Y}
-    {stroke}
-    opacity={shouldReduceOpacity
-      ? $drawConfig.missingValuesConfiguration.missingValueOpacity
-      : 1}
-    stroke-dasharray={shouldDashStroke
-      ? $drawConfig.missingValuesConfiguration.strokeDasharray
-      : ""}
-  />
+      {stroke}
+      opacity={shouldReduceOpacity
+        ? $drawConfig.missingValuesConfiguration.missingValueOpacity
+        : 1}
+      stroke-dasharray={shouldDashStroke
+        ? $drawConfig.missingValuesConfiguration.strokeDasharray
+        : ""}
+    />
+  {/if}
   {#if shouldDrawGlyph}
     <circle
       cx={axis2.offset}
