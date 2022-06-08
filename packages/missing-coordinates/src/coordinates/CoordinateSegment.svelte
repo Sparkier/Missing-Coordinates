@@ -10,8 +10,8 @@
   export let axis1Index: number;
   export let color: string;
 
-  $: axis1Pos = getCoordinatePosition(axis1);
-  $: axis2Pos = getCoordinatePosition(axis2);
+  $: axis1Y = Math.round(getCoordinatePosition(axis1));
+  $: axis2Y = Math.round(getCoordinatePosition(axis2));
   $: isAxis1Null = coordinate.values[axis1.name] === null;
   $: isAxis2Null = coordinate.values[axis2.name] === null;
   // Check if a glyph should be drawn for the end of the segment.
@@ -30,7 +30,7 @@
   // Set the stroke to the appropriate color/gradient.
   $: stroke = getStroke($drawConfig.variation, isAxis1Null, isAxis2Null);
 
-  function getCoordinatePosition(axis: AxisDescriptor): number | undefined {
+  function getCoordinatePosition(axis: AxisDescriptor): number {
     const value = coordinate.values[axis.name];
 
     if (value === null) {
@@ -46,9 +46,10 @@
     } else if (axis.extremes !== undefined && typeof value === "number") {
       return getNumericalAxisPosition(axis.extremes, value);
     }
+    return -1;
   }
 
-  function getPostionForMissingValue(axis: AxisDescriptor): number | undefined {
+  function getPostionForMissingValue(axis: AxisDescriptor): number {
     if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
       return (
         $drawConfig.axisHeight +
@@ -72,7 +73,7 @@
       }
     }
     // default case (Information Removal)
-    return;
+    return -1;
   }
 
   function getCategoricalAxisPosition(
@@ -123,12 +124,12 @@
   }
 </script>
 
-{#if axis1Pos !== undefined && axis2Pos !== undefined}
+{#if axis1Y >= 0 && axis2Y >= 0}
   <line
     x1={axis1.offset}
     x2={axis2.offset}
-    y1={axis1Pos}
-    y2={axis2Pos}
+      y1={axis1Y}
+      y2={axis2Y}
     {stroke}
     opacity={shouldReduceOpacity
       ? $drawConfig.missingValuesConfiguration.missingValueOpacity
@@ -140,7 +141,7 @@
   {#if shouldDrawGlyph}
     <circle
       cx={axis2.offset}
-      cy={axis2Pos}
+      cy={axis2Y}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke={color}
@@ -149,7 +150,7 @@
   {#if shouldDrawGlyphFirstAxis}
     <circle
       cx={axis1.offset}
-      cy={axis1Pos}
+      cy={axis1Y}
       r={$drawConfig.missingValuesConfiguration.glyphRadius}
       fill="white"
       stroke={color}
