@@ -89,35 +89,89 @@ const defaultArgs = {
 export const Sample = SampleTemplate.bind({});
 Sample.args = {
   data: sample,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      coloring: {
+        ...defaultArgs.drawConfiguration.coloring,
+        coloringAxis: "dim 1",
+      },
+    },
+  },
 };
 
 export const AirlineComplete = AirlineCompleteTemplate.bind({});
 AirlineComplete.args = {
   data: airlineSafetyComplete,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      axesSpacing: 150,
+      axisHeight: 300,
+      margin: { ...defaultArgs.drawConfiguration.margin, left: 80, right: 80 },
+      coloring: {
+        ...defaultArgs.drawConfiguration.coloring,
+        coloringAxis: "fatalities_00_14",
+      },
+    },
+  },
 };
 
 export const DriverComplete = DriverCompleteTemplate.bind({});
 DriverComplete.args = {
   data: badDriverComplete,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      axesSpacing: 150,
+      axisHeight: 300,
+      margin: { ...defaultArgs.drawConfiguration.margin, left: 50, right: 50 },
+      coloring: {
+        ...defaultArgs.drawConfiguration.coloring,
+        coloringAxis: "Alc. Impaired",
+      },
+    },
+  },
 };
 
 export const IrisComplete = IrisCompleteTemplate.bind({});
 IrisComplete.args = {
   data: irisComplete,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      axesSpacing: 150,
+      axisHeight: 200,
+      margin: { ...defaultArgs.drawConfiguration.margin, left: 50, right: 50 },
+    },
+  },
 };
 
 export const MpgComplete = MpgCompleteTemplate.bind({});
 MpgComplete.args = {
   data: mpgComplete,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      axesSpacing: 150,
+      axisHeight: 300,
+      coloring: {
+        ...defaultArgs.drawConfiguration.coloring,
+        coloringAxis: "origin",
+      },
+    },
+  },
 };
 
 export const PenguinComplete = PenguinCompleteTemplate.bind({});
 PenguinComplete.args = {
   data: penguinsComplete,
-  ...defaultArgs,
+  ...{
+    drawConfiguration: {
+      ...defaultArgs.drawConfiguration,
+      axesSpacing: 150,
+      axisHeight: 350,
+      margin: { ...defaultArgs.drawConfiguration.margin, left: 30, right: 30 },
+    },
+  },
 };
