@@ -19,8 +19,7 @@
       {coordinate}
       axis1={axis}
       axis2={$axes[index + 1]}
-      axis1Index={index}
-      color={color}
+      {color}
     />
   {/if}
 {/each}

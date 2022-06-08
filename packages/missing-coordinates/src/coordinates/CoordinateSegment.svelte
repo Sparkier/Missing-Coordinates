@@ -7,7 +7,6 @@
   export let coordinate: Coordinate;
   export let axis1: AxisDescriptor;
   export let axis2: AxisDescriptor;
-  export let axis1Index: number;
   export let color: string;
 
   $: axis1Y = getCoordinatePosition(
@@ -26,13 +25,6 @@
   );
   $: isAxis1Null = coordinate.values[axis1.name] === null;
   $: isAxis2Null = coordinate.values[axis2.name] === null;
-  // Check if a glyph should be drawn for the end of the segment.
-  $: shouldDrawGlyph = $drawConfig.variation === Variation.GLYPH && isAxis2Null;
-  // Special case if we need to draw a glyph for the first axis.
-  $: shouldDrawGlyphFirstAxis =
-    axis1Index === 0 &&
-    $drawConfig.variation === Variation.GLYPH &&
-    isAxis1Null;
   // Check whether the opacity of the line segment should be reduced.
   $: shouldReduceOpacity =
     $drawConfig.variation === Variation.OPACITY && (isAxis1Null || isAxis2Null);
@@ -97,24 +89,6 @@
       stroke-dasharray={shouldDashStroke
         ? $drawConfig.missingValuesConfiguration.strokeDasharray
         : ""}
-    />
-  {/if}
-  {#if shouldDrawGlyph}
-    <circle
-      cx={axis2.offset}
-      cy={axis2Y}
-      r={$drawConfig.missingValuesConfiguration.glyphRadius}
-      fill="white"
-      stroke={color}
-    />
-  {/if}
-  {#if shouldDrawGlyphFirstAxis}
-    <circle
-      cx={axis1.offset}
-      cy={axis1Y}
-      r={$drawConfig.missingValuesConfiguration.glyphRadius}
-      fill="white"
-      stroke={color}
     />
   {/if}
 {/if}
