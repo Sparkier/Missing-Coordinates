@@ -36,6 +36,7 @@ export class MissingValuesConfiguraion {
   glyphRadius = 4;
   missingValueOpacity = 0.1;
   strokeDasharray = "5 5";
+  gradientFalloff = 0.25;
 }
 
 export enum TopBottomPosition {
