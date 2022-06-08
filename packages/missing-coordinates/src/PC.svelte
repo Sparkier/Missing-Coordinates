@@ -5,8 +5,7 @@
   import Coordinates from "./coordinates/Coordinates.svelte";
   import MissingValuesAxis from "./axes/MissingValuesAxis.svelte";
   import Gradients from "./gradients/Gradients.svelte";
-  import type { ColorScale } from "./color/scales";
-
+  import Glyphs from "./glyphs/Glyphs.svelte";
   import {
     width,
     height,
@@ -47,9 +46,12 @@
         })`}
       >
         <Axes />
-        <Coordinates />
         {#if $drawConfig.concept === Concept.MISSING_VALUES_AXIS}
           <MissingValuesAxis />
+        {/if}
+        <Coordinates />
+        {#if $drawConfig.variation === Variation.GLYPH}
+          <Glyphs />
         {/if}
       </g>
     </g>
