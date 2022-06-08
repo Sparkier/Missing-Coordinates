@@ -85,7 +85,7 @@ function getCategoricalAxisPosition(
     return drawConfig.axisHeight / 2;
   }
   return (
-    (categoricalItems.indexOf(value) / (categoricalItems.length - 1)) *
+    (1 - categoricalItems.indexOf(value) / (categoricalItems.length - 1)) *
     drawConfig.axisHeight
   );
 }
