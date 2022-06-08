@@ -32,22 +32,25 @@ export class HSL {
   opacity: number;
 
   constructor(h: number, s: number, l: number, opacity = 1.0) {
-    this.h = h;
-    this.s = s;
-    this.l = l;
-    this.opacity = opacity;
+    this.h = +h;
+    this.s = +s;
+    this.l = +l;
+    this.opacity = +opacity;
   }
 
   rgb(): [number, number, number, number] {
+    const clamp = (value: number): number => {
+      return Math.max(0, Math.min(255, Math.round(value) || 0));
+    };
     const h = isNaN(this.h) ? 0 : (this.h + 120) * (Math.PI / 180);
     const l = +this.l;
     const a = isNaN(this.s) ? 0 : this.s * l * (1 - l);
     const cosh = Math.cos(h);
     const sinh = Math.sin(h);
     return [
-      Math.round(255 * (l + a * (A * cosh + B * sinh))),
-      Math.round(255 * (l + a * (C * cosh + D * sinh))),
-      Math.round(255 * (l + a * (E * cosh))),
+      clamp(255 * (l + a * (A * cosh + B * sinh))),
+      clamp(255 * (l + a * (C * cosh + D * sinh))),
+      clamp(255 * (l + a * (E * cosh))),
       this.opacity,
     ];
   }
