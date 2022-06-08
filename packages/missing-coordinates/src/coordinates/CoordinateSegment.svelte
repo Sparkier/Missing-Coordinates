@@ -2,7 +2,7 @@
   import { AxisDescriptor, Coordinate, Variation } from "../types";
   import { Concept } from "../types";
   import { axes, data, drawConfig } from "../stores";
-  import { imputeValueForAxis } from "./imputation";
+  import { getCoordinatePosition } from "./index";
 
   export let coordinate: Coordinate;
   export let axis1: AxisDescriptor;
@@ -10,8 +10,20 @@
   export let axis1Index: number;
   export let color: string;
 
-  $: axis1Y = Math.round(getCoordinatePosition(axis1));
-  $: axis2Y = Math.round(getCoordinatePosition(axis2));
+  $: axis1Y = getCoordinatePosition(
+    axis1,
+    coordinate,
+    $drawConfig,
+    $data,
+    $axes
+  );
+  $: axis2Y = getCoordinatePosition(
+    axis2,
+    coordinate,
+    $drawConfig,
+    $data,
+    $axes
+  );
   $: isAxis1Null = coordinate.values[axis1.name] === null;
   $: isAxis2Null = coordinate.values[axis2.name] === null;
   // Check if a glyph should be drawn for the end of the segment.
@@ -37,75 +49,6 @@
     $drawConfig.variation === Variation.GRADIENT &&
     $drawConfig.concept === Concept.IMPUTATION &&
     (isAxis1Null || isAxis2Null);
-
-  function getCoordinatePosition(axis: AxisDescriptor): number {
-    const value = coordinate.values[axis.name];
-
-    if (value === null) {
-      return getPostionForMissingValue(axis);
-    }
-
-    if (
-      axis.categorical &&
-      axis.categoricalItems !== undefined &&
-      typeof value === "string"
-    ) {
-      return getCategoricalAxisPosition(axis.categoricalItems, value);
-    } else if (axis.extremes !== undefined && typeof value === "number") {
-      return getNumericalAxisPosition(axis.extremes, value);
-    }
-    return -1;
-  }
-
-  function getPostionForMissingValue(axis: AxisDescriptor): number {
-    if ($drawConfig.concept === Concept.MISSING_VALUES_AXIS) {
-      return (
-        $drawConfig.axisHeight +
-        $drawConfig.missingValuesConfiguration.missingValuesAxisSpacing
-      );
-    } else if ($drawConfig.concept === Concept.IMPUTATION) {
-      const value = imputeValueForAxis(
-        $data,
-        axis,
-        coordinate,
-        $drawConfig.missingValuesConfiguration.imputationNeighbors,
-        $axes
-      );
-      if (axis.categorical && axis.categoricalItems !== undefined) {
-        return getCategoricalAxisPosition(
-          axis.categoricalItems,
-          value as string
-        );
-      } else if (!axis.categorical && axis.extremes !== undefined) {
-        return getNumericalAxisPosition(axis.extremes, value as number);
-      }
-    }
-    // default case (Information Removal)
-    return -1;
-  }
-
-  function getCategoricalAxisPosition(
-    categoricalItems: string[],
-    value: string
-  ): number {
-    if (categoricalItems.length === 1) {
-      return $drawConfig.axisHeight / 2;
-    }
-    return (
-      (categoricalItems.indexOf(value) / (categoricalItems.length - 1)) *
-      $drawConfig.axisHeight
-    );
-  }
-
-  function getNumericalAxisPosition(
-    axisExtremes: { min: number; max: number },
-    value: number
-  ): number {
-    return (
-      ((value - axisExtremes.min) / (axisExtremes.max - axisExtremes.min)) *
-      $drawConfig.axisHeight
-    );
-  }
 
   function getStroke(
     variation: Variation,
