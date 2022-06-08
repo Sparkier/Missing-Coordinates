@@ -1,6 +1,6 @@
 {
   "name": "missing-coordinates",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "license": "BSD-3-Clause",
   "description": "Draw parallel coordinates with missing values.",
   "author": "Alex Bäuerle <bauerlealex@gmail.com> (https://a13x.io)",
