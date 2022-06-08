@@ -96,7 +96,7 @@ function getNumericalAxisPosition(
   drawConfig: DrawConfiguration
 ): number {
   return (
-    ((value - axisExtremes.min) / (axisExtremes.max - axisExtremes.min)) *
+    (1 - (value - axisExtremes.min) / (axisExtremes.max - axisExtremes.min)) *
     drawConfig.axisHeight
   );
 }
