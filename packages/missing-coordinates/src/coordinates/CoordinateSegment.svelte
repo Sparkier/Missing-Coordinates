@@ -83,9 +83,10 @@
       y1={axis1Y}
       y2={axis2Y}
       {stroke}
-      opacity={shouldReduceOpacity
-        ? $drawConfig.missingValuesConfiguration.missingValueOpacity
-        : 1}
+      opacity={$drawConfig.lineOpacity *
+        (shouldReduceOpacity
+          ? $drawConfig.missingValuesConfiguration.missingValueOpacity
+          : 1)}
       stroke-dasharray={shouldDashStroke
         ? $drawConfig.missingValuesConfiguration.strokeDasharray
         : ""}
