@@ -44,7 +44,7 @@
         window.open("https://github.com/Sparkier/Missing-Coordinates")}
     >
       <img src={githubImage} alt="github mark" />
-      <div>View on GitHub</div>
+      <div class="nowrap">View on GitHub</div>
     </button>
   </div>
   <div class="main-div">
@@ -103,7 +103,8 @@
     background-color: #eee;
   }
   img {
-    height: 100%;
+    height: 14px;
+    width: 14px;
     padding-right: 0.5em;
   }
   button {
@@ -141,5 +142,8 @@
   }
   .header {
     font-size: 2em;
+  }
+  .nowrap {
+    white-space: nowrap;
   }
 </style>
