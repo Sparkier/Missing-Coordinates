@@ -1,4 +1,4 @@
-import type { HSL } from "./sequentialColorInterpolators";
+import type { Cubehelix } from "./sequentialColorInterpolators";
 import type { ColorScale } from "./scales";
 
 export default class ScaleSequential implements ColorScale {
@@ -7,7 +7,7 @@ export default class ScaleSequential implements ColorScale {
     end: number;
   } = { start: 0, end: 0 };
 
-  private interpolateFn: ((t: number) => HSL) | null = null;
+  private interpolateFn: ((t: number) => Cubehelix) | null = null;
 
   public valueAt(value: number | string): string | null {
     if (this.interpolateFn === null) {
@@ -48,7 +48,9 @@ export default class ScaleSequential implements ColorScale {
     return this;
   }
 
-  public interpolator(interpolateFn: (t: number) => HSL): ScaleSequential {
+  public interpolator(
+    interpolateFn: (t: number) => Cubehelix
+  ): ScaleSequential {
     this.interpolateFn = interpolateFn;
     return this;
   }

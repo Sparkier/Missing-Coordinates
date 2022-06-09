@@ -25,29 +25,32 @@ const colorInterpolator = (a: number, b: number) => {
   return d ? scaleLinear(a, d) : constant(isNaN(a) ? b : a);
 };
 
-export class HSL {
+export class Cubehelix {
   h = 0;
   s = 0;
   l = 0;
   opacity: number;
 
   constructor(h: number, s: number, l: number, opacity = 1.0) {
-    this.h = h;
-    this.s = s;
-    this.l = l;
-    this.opacity = opacity;
+    this.h = +h;
+    this.s = +s;
+    this.l = +l;
+    this.opacity = +opacity;
   }
 
   rgb(): [number, number, number, number] {
+    const clamp = (value: number): number => {
+      return Math.max(0, Math.min(255, Math.round(value) || 0));
+    };
     const h = isNaN(this.h) ? 0 : (this.h + 120) * (Math.PI / 180);
     const l = +this.l;
     const a = isNaN(this.s) ? 0 : this.s * l * (1 - l);
     const cosh = Math.cos(h);
     const sinh = Math.sin(h);
     return [
-      Math.round(255 * (l + a * (A * cosh + B * sinh))),
-      Math.round(255 * (l + a * (C * cosh + D * sinh))),
-      Math.round(255 * (l + a * (E * cosh))),
+      clamp(255 * (l + a * (A * cosh + B * sinh))),
+      clamp(255 * (l + a * (C * cosh + D * sinh))),
+      clamp(255 * (l + a * (E * cosh))),
       this.opacity,
     ];
   }
@@ -62,10 +65,16 @@ export class HSL {
   }
 }
 
-export type interpolateFunction = (t: number) => HSL;
-type hslInterpolatorFn = (start: HSL, end: HSL) => interpolateFunction;
+export type interpolateFunction = (t: number) => Cubehelix;
+type hslInterpolatorFn = (
+  start: Cubehelix,
+  end: Cubehelix
+) => interpolateFunction;
 
-const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
+const hslInterpolator: hslInterpolatorFn = (
+  start: Cubehelix,
+  end: Cubehelix
+) => {
   const h = hueInterpolator(start.h, end.h);
   const s = colorInterpolator(start.s, end.s);
   const l = colorInterpolator(start.l, end.l);
@@ -81,6 +90,18 @@ const hslInterpolator: hslInterpolatorFn = (start: HSL, end: HSL) => {
 };
 
 export const interpolators = new Map([
-  ["warm", hslInterpolator(new HSL(-100, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
-  ["cool", hslInterpolator(new HSL(260, 0.75, 0.35), new HSL(80, 1.5, 0.8))],
+  [
+    "warm",
+    hslInterpolator(
+      new Cubehelix(-100, 0.75, 0.35),
+      new Cubehelix(80, 1.5, 0.8)
+    ),
+  ],
+  [
+    "cool",
+    hslInterpolator(
+      new Cubehelix(260, 0.75, 0.35),
+      new Cubehelix(80, 1.5, 0.8)
+    ),
+  ],
 ]);
