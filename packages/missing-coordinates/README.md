@@ -8,6 +8,8 @@ Implementation of a novel extension to Parallel Coordinates, introcuded in the P
 
 presented at [EuroVis 2022](https://conferences.eg.org/eurovis2022/). Created by [Alex Bäuerle](https://a13x.io/), [Christian van Onzenoodt](https://onze.io/), Simon der Kinderen, [Jimmy Johansson Westberg](https://liu.se/en/employee/jimjo94), [Daniel Jönsson](https://liu.se/en/employee/danjo37), and [Timo Ropinski](https://viscom.uni-ulm.de/members/timo-ropinski/).
 
+For a demo of missing-coordinates, check out our [storybook example](http://a13x.io/Missing-Coordinates/).
+
 ## Usage
 
 After installing the package from npm via:
