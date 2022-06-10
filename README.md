@@ -8,69 +8,23 @@ Implementation of a novel extension to Parallel Coordinates, introcuded in the P
 
 presented at [EuroVis 2022](https://conferences.eg.org/eurovis2022/). Created by [Alex Bäuerle](https://a13x.io/), [Christian van Onzenoodt](https://onze.io/), Simon der Kinderen, [Jimmy Johansson Westberg](https://liu.se/en/employee/jimjo94), [Daniel Jönsson](https://liu.se/en/employee/danjo37), and [Timo Ropinski](https://viscom.uni-ulm.de/members/timo-ropinski/).
 
-## Usage
+For a demo of missing-coordinates, check out our [storybook example](http://a13x.io/Missing-Coordinates/).
 
-After installing the package from npm via:
+## Demo and Usage
 
-`npm install --save missing-coordinates`
+For a demo of missing-coordinates, check out our [storybook example](http://a13x.io/Missing-Coordinates/).
 
-Using our Parallel Coordinates implementation is as simple as:
+For detailed usage instructions, see [packages/missing-coordinates](https://github.com/Sparkier/missing-coordinates/tree/main/packages/missing-coordinates).
 
-### Plain JS
+## Packages
 
-script.js
+### missing-coordinates
 
-```javascript
-import { PC } from "./node_modules/missing-coordinates/dist/index.mjs";
-// if you are using a bundler, this would be import { PC } from "missing-coordinates";
+The main package including the implementation for parallel coordinates with missing data.
 
-new PC({
-  target: document.body,
-  props: {
-    data: {
-      name: "sample",
-      axes: [
-        { name: "A", data: ["A", "A", "A", "A", "B", "B"] },
-        { name: "B", data: [0.0, null, 0.4, null, 0.8, 1.0] },
-        { name: "C", data: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] },
-      ],
-    },
-  },
-});
-```
+### Storybook
 
-index.html
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <style></style>
-  <body>
-    <script src="script.js" type="module"></script>
-  </body>
-</html>
-```
-
-### Svelte
-
-```javascript
-<script>
-  import { PC } from "missing-coordinates";
-</script>
-
-<main>
-  <PC
-    data={{
-      name: "sample",
-      axes: [
-        { name: "A", data: ["A", "A", "A", "A", "B", "B"] },
-        { name: "B", data: [0.0, null, 0.4, null, 0.8, 1.0] },
-        { name: "C", data: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] },
-      ],
-    }}
-  />
-</main>
-```
+An interactive web demo of missing-coordinates with examples of data sets, editable configurations, and configurable removal amounts.
 
 ## Contributing
 
