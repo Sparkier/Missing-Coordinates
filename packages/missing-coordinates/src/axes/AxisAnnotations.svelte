@@ -1,17 +1,9 @@
 <script lang="ts">
   import AxisAnnotation from "./AxisAnnotation.svelte";
-  import { drawConfig, data, axisLabelTopOffset } from "../stores";
+  import { drawConfig, axisLabelTopOffset, axes } from "../stores";
 
-  $: annotations = $data.axes.map((value, index) => {
-    if (value.data.length > 0 && typeof value.data[0] !== "string") {
-      const numberData = value.data as number[];
-      return {
-        show: true,
-        min: Math.min(...numberData),
-        max: Math.max(...numberData),
-        offset: index * $drawConfig.axesSpacing,
-      };
-    } else {
+  $: annotations = $axes.map((axis, index) => {
+    if (axis.categorical) {
       return {
         show: false,
         min: 0,
@@ -19,6 +11,12 @@
         offset: index * $drawConfig.axesSpacing,
       };
     }
+    return {
+      show: true,
+      min: axis.extremes !== undefined ? axis.extremes.min : 0,
+      max: axis.extremes !== undefined ? axis.extremes.max : 0,
+      offset: index * $drawConfig.axesSpacing,
+    };
   });
 </script>
 
