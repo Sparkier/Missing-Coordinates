@@ -5,6 +5,32 @@
 
   export let drawConfiguration: DrawConfiguration;
   export let data: Data;
+
+  $: axes = data.axes.map((axis) => axis.name);
+  $: removalAmounts = new Map(axes.map((axis) => [axis, 0]));
+  $: manipulatedData = {
+    name: data.name,
+    axes: data.axes.map((axis) => {
+      const indexArray = [...Array(axis.data.length).keys()];
+      const removalFraction = removalAmounts.get(axis.name);
+      if (removalFraction !== undefined) {
+        const numToRemove = axis.data.length * (removalFraction / 100);
+        const shuffled = indexArray.sort(() => 0.5 - Math.random());
+        const indicesToRemove = shuffled.slice(0, numToRemove);
+        const removalData = [...axis.data];
+        indicesToRemove.forEach((index) => (removalData[index] = null));
+        return { name: axis.name, data: removalData };
+      }
+      return { name: axis.name, data: axis.data };
+    }),
+  };
+
+  function changeRemovalAmount(e: CustomEvent, axis: string) {
+    removalAmounts = removalAmounts.set(
+      axis,
+      +(e.currentTarget as HTMLInputElement).value
+    );
+  }
 </script>
 
 <main class="content">
@@ -23,8 +49,28 @@
   </div>
   <div class="main-div">
     <div class="chart-div">
-      <PC {data} {drawConfiguration} />
+      <PC data={manipulatedData} {drawConfiguration} />
     </div>
+  </div>
+  <div class="content p-t">
+    <div class="header">Remove Data</div>
+    {#each [...removalAmounts] as removalAmount}
+      <div class="row-content p-bt">
+        {removalAmount[0]}
+        <div class="p-l">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={removalAmount[1]}
+            on:change={(e) => changeRemovalAmount(e, removalAmount[0])}
+          />
+        </div>
+        <div class="p-l">
+          {`${removalAmount[1]}%`}
+        </div>
+      </div>
+    {/each}
   </div>
 </main>
 
@@ -82,5 +128,18 @@
     display: flex;
     align-items: flex-start;
     align-content: flex-start;
+  }
+  .p-bt {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+  }
+  .p-t {
+    padding-top: 1em;
+  }
+  .p-l {
+    padding-left: 0.5em;
+  }
+  .header {
+    font-size: 2em;
   }
 </style>
