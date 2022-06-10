@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="https://github.com/Sparkier/Missing-Coordinates/actions/workflows/ci.yml">
+    <img src="https://github.com/Sparkier/Missing-Coordinates/actions/workflows/ci.yml/badge.svg" alt="Current build status">
+  </a>
+  <a href="https://www.npmjs.com/package/missing-coordinates">
+    <img src="https://img.shields.io/npm/v/missing-coordinates.svg" alt="Current NPM version">
+  </a>
+</p>
+
 # Missing Coordinates
 
 ![Teaser Image](https://github.com/Sparkier/Missing-Coordinates/blob/70e6d731444b108e6bff597dac0cbbb15271d211/.github/readme_pictures/teaser.png)
