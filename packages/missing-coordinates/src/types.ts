@@ -1,12 +1,12 @@
 export class DrawConfiguration {
-  axesSpacing = 100;
-  axisHeight = 100;
+  axesSpacing = 120;
+  axisHeight = 200;
   axisLabelConfiguration = new AxisLabelConfiguration();
   axisAnnotationConfiguration = new AxisAnnotationConfiguration();
   margin: Margin = { left: 20, right: 20, top: 20, bottom: 20 };
   fontSize = 12;
-  variation: Variation = Variation.DEFAULT;
-  concept: Concept = Concept.INFORMATION_REMOVAL;
+  variation: Variation = Variation.DASHED;
+  concept: Concept = Concept.IMPUTATION;
   missingValuesConfiguration = new MissingValuesConfiguraion();
   drawingOrder: DrawingOrder = DrawingOrder.RANDOM;
   lineOpacity = 0.5;
