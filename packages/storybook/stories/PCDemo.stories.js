@@ -57,6 +57,11 @@ export default {
       options: ["start", "middle", "end"],
       control: { type: "inline-radio" },
     },
+    "drawConfiguration > drawingOrder": {
+      table: {
+        disable: true,
+      },
+    },
     data: {
       table: {
         disable: true,
@@ -108,7 +113,7 @@ const defaultArgs = {
     },
     lineOpacity: 0.5,
     fontSize: 12,
-    drawingOrder: DrawingOrder.RANDOM,
+    drawingOrder: DrawingOrder.ORDERED,
     missingValuesConfiguration: {
       missingValuesAxisSpacing: 35,
       imputationNeighbors: 2,
