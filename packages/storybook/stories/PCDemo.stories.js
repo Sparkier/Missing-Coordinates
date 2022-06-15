@@ -58,8 +58,10 @@ export default {
       control: { type: "inline-radio" },
     },
     "drawConfiguration > drawingOrder": {
-      table: {
-        disable: true,
+      options: [0, 1],
+      control: {
+        type: "radio",
+        labels: ["Random", "Ordered"],
       },
     },
     data: {
@@ -113,7 +115,7 @@ const defaultArgs = {
     },
     lineOpacity: 0.5,
     fontSize: 12,
-    drawingOrder: DrawingOrder.ORDERED,
+    drawingOrder: DrawingOrder.RANDOM,
     missingValuesConfiguration: {
       missingValuesAxisSpacing: 35,
       imputationNeighbors: 2,

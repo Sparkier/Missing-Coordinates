@@ -32,7 +32,7 @@
   $: shouldDashStroke =
     $drawConfig.variation === Variation.DASHED && (isAxis1Null || isAxis2Null);
   // Set the stroke to the appropriate color/gradient.
-  $: stroke = getStroke($drawConfig.variation, isAxis1Null, isAxis2Null);
+  $: stroke = getStroke(color, $drawConfig.variation, isAxis1Null, isAxis2Null);
   // Horizontal gradient lines are invisible in SVG.
   // (https://stackoverflow.com/questions/13223636/svg-gradient-for-perfectly-horizontal-path)
   // Therefore, we replace the line with a rect if that is the case.
@@ -43,6 +43,7 @@
     (isAxis1Null || isAxis2Null);
 
   function getStroke(
+    color: string,
     variation: Variation,
     axis1Null: boolean,
     axis2Null: boolean
