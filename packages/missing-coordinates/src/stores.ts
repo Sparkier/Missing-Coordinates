@@ -128,7 +128,7 @@ export const coordinates = derived(data, ($data) => {
     $data.axes.forEach(
       (axis) => (values[axis.name] = axis.data.length > i ? axis.data[i] : null)
     );
-    coords.push({ values: values });
+    coords.push({ values });
   }
   return coords;
 });
