@@ -18,7 +18,7 @@
   "private": true,
   "sideEffects": false,
   "dependencies": {
-    "@storybook/source-loader": "6.5.8",
+    "@storybook/source-loader": "6.5.12",
     "@storybook/svelte": "6.5.8",
     "flat": "^5.0.2",
     "svelte": "^3.48.0"
