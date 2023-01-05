@@ -13,7 +13,7 @@
 
 Implementation of a novel extension to Parallel Coordinates, introduced in the Paper:
 
-> Where did my Lines go? Visualizing Missing Data in Parallel Coordinates
+> [Where did my Lines go? Visualizing Missing Data in Parallel Coordinates](https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14536)
 
 presented at [EuroVis 2022](https://conferences.eg.org/eurovis2022/). Created by [Alex Bäuerle](https://a13x.io/), [Christian van Onzenoodt](https://onze.io/), Simon der Kinderen, [Jimmy Johansson Westberg](https://liu.se/en/employee/jimjo94), [Daniel Jönsson](https://liu.se/en/employee/danjo37), and [Timo Ropinski](https://viscom.uni-ulm.de/members/timo-ropinski/).
 
@@ -100,3 +100,18 @@ An interactive web demo of missing-coordinates with examples of data sets, edita
 ## Contributing
 
 You can find detailed informations on how to contribute to this project in our [contribution guide](https://github.com/Sparkier/Missing-Coordinates/blob/main/CONTRIBUTING.md).
+
+## Citation
+
+If you find this work or code useful please consider citing us:
+
+    @inproceedings{bauerle2022did,
+      title={Where did my Lines go? Visualizing Missing Data in Parallel Coordinates},
+      author={B{\"a}uerle, Alex and van Onzenoodt, C and der Kinderen, S and Westberg, J Johansson and J{\"o}nsson, Daniel and Ropinski, Timo},
+      booktitle={Computer Graphics Forum},
+      volume={41},
+      number={3},
+      pages={235--246},
+      year={2022},
+      organization={Wiley Online Library}
+    }
